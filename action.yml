@@ -1,0 +1,15 @@
+name: 'JavaScript Lockfile Check'
+description: 'Check for and enforce the correct lockfile for your JS project.'
+inputs:
+  package-manager:
+    description: 'The package manager you use'
+    required: true
+    default: 'npm'
+outputs:
+  results:
+    description: 'The results of the check'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.pacakge-manager }}
