@@ -1,0 +1,21 @@
+version: 2
+updates:
+  - package-ecosystem: docker
+    directory: '/'
+    schedule:
+      interval: daily
+      time: '07:00'
+    open-pull-requests-limit: 10
+    reviewers:
+      - agarzola
+    assignees:
+      - agarzola
+  - package-ecosystem: github-actions
+    directory: '/'
+    schedule:
+      interval: daily
+      time: '07:00'
+    reviewers:
+      - agarzola
+    assignees:
+      - agarzola
