@@ -14,9 +14,18 @@ and avoid a scenario where more than one lockfile is present.
   - `yarn`: Ensure that a `yarn.lock` file is present and that no
     `package-lock.json` file is present.
 
-## Example usage
+## Usage
 
-The following example presumes you’re using Yarn:
+To use this action, simply add a step to your workflow, like so:
+
+```yaml
+- uses: actions/javascript-lockfile-check@v1.0.0
+  with:
+    package-manager: npm
+```
+
+Here’s an example workflow that checks out your repo and checks that you have
+the correct lockfile for Yarn:
 
 ```yaml
 on: push
