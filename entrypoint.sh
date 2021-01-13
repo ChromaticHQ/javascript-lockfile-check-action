@@ -1,4 +1,4 @@
-#!/bin/sh -l
+#!/usr/bin/env bash
 
 # Fail the job if there are any failures below.
 set -e
