@@ -1,3 +1,4 @@
+---
 name: 'JavaScript Lockfile Check'
 description: 'Check for and enforce the correct lockfile for your JS project.'
 inputs:
