@@ -1,5 +1,7 @@
 # JavaScript Lockfile Check
 
+![Tests](https://github.com/ChromaticHQ/javascript-lockfile-check-action/workflows/Tests/badge.svg) ![Linting & Checks](https://github.com/ChromaticHQ/javascript-lockfile-check-action/workflows/Linting%20&%20Checks/badge.svg)
+
 This action checks that the correct lockfile is present at the root of a
 project. It also checks that no extraneous lockfiles for other JavaScript
 package managers are present. The intent is to enforce a given package manager
