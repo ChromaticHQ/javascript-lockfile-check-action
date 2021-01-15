@@ -21,7 +21,7 @@ and avoid a scenario where more than one lockfile is present.
 To use this action, simply add a step to your workflow, like so:
 
 ```yaml
-- uses: actions/javascript-lockfile-check@v1.0.0
+- uses: ChromaticHQ/javascript-lockfile-check-action@v1.1.0
   with:
     package-manager: npm
 ```
@@ -39,7 +39,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Check JS Lockfile
-        uses: actions/javascript-lockfile-check@v1.0.0
+        uses: ChromaticHQ/javascript-lockfile-check-action@v1.1.0
         with:
           package-manager: yarn
 ```
