@@ -1,8 +1,9 @@
 ---
 name: 'JavaScript Lockfile Check'
 description: 'Check for and enforce the correct lockfile for your JS project.'
-icon: 'lock'
-color: 'yellow'
+branding:
+  icon: 'lock'
+  color: 'yellow'
 inputs:
   package-manager:
     description: 'The package manager you use'
