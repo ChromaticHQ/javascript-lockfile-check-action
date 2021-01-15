@@ -1,0 +1,37 @@
+---
+on: [push]
+
+jobs:
+  test-npm-success:
+    runs-on: ubuntu-latest
+    name: Test successful npm check
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Create dummy package-lock.json file
+        run: touch package-lock.json
+      - name: Run lockfile check action
+        uses: ./
+        with:
+          package-manager: npm
+  test-npm-missing-lockfile:
+    runs-on: ubuntu-latest
+    name: Test missing lockfile for npm
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Create dummy lockfiles
+        run: touch package-lock.json && touch yarn.lock
+      - name: Run lockfile check action
+        uses: ./
+        with:
+          package-manager: npm
+      - name: Expect failure
+        if: ${{ always() }}
+        run: test "$JOB_STATUS" = "failure"
+        env:
+          JOB_STATUS: ${{ job.status}}
+  # test-npm-extraneous-lockfile:
+  # test-yarn-success:
+  # test-yarn-missing-lockfile:
+  # test-yarn-extraneous-lockfile:
