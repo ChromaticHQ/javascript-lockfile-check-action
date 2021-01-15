@@ -1,6 +1,6 @@
 ---
 on: [push]
-
+name: Tests
 jobs:
   test-npm-success:
     runs-on: ubuntu-latest
@@ -23,14 +23,15 @@ jobs:
       - name: Create dummy lockfiles
         run: touch package-lock.json && touch yarn.lock
       - name: Run lockfile check action
+        id: run-check
         continue-on-error: true
         uses: ./
         with:
           package-manager: npm
       - name: Expect failure
-        run: test "$JOB_STATUS" = "failure"
+        run: test "$CHECK_RESULT" = "failure"
         env:
-          JOB_STATUS: ${{ job.status}}
+          CHECK_RESULT: ${{ steps.run-check.outputs.lockfile-check-result }}
   # test-npm-extraneous-lockfile:
   # test-yarn-success:
   # test-yarn-missing-lockfile:

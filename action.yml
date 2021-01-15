@@ -7,8 +7,8 @@ inputs:
     required: true
     default: 'npm'
 outputs:
-  results:
-    description: 'The results of the check'
+  lockfile-check-result:
+    description: 'The results of the check; can be `success` or `failure`.'
 runs:
   using: 'docker'
   image: 'Dockerfile'
