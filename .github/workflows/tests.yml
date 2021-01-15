@@ -16,6 +16,7 @@ jobs:
       - name: Create dummy package-lock.json file
         run: touch package-lock.json
       - name: Run lockfile check action
+        # Use the action in this repository.
         uses: ./
         with:
           package-manager: npm
@@ -32,6 +33,7 @@ jobs:
       - name: Run lockfile check action
         id: run-check
         continue-on-error: true
+        # Use the action in this repository.
         uses: ./
         with:
           package-manager: npm
@@ -54,6 +56,7 @@ jobs:
       - name: Run lockfile check action
         id: run-check
         continue-on-error: true
+        # Use the action in this repository.
         uses: ./
         with:
           package-manager: npm
@@ -75,6 +78,7 @@ jobs:
       - name: Create dummy yarn.lock file
         run: touch yarn.lock
       - name: Run lockfile check action
+        # Use the action in this repository.
         uses: ./
         with:
           package-manager: yarn
@@ -91,6 +95,7 @@ jobs:
       - name: Run lockfile check action
         id: run-check
         continue-on-error: true
+        # Use the action in this repository.
         uses: ./
         with:
           package-manager: yarn
@@ -113,6 +118,7 @@ jobs:
       - name: Run lockfile check action
         id: run-check
         continue-on-error: true
+        # Use the action in this repository.
         uses: ./
         with:
           package-manager: yarn
