@@ -20,6 +20,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Run lockfile check action
+        id: run-check
+        continue-on-error: true
+        uses: ./
+        with:
+          package-manager: npm
+      - name: Expect failure
+        run: test "$CHECK_RESULT" = "failure"
+        env:
+          CHECK_RESULT: ${{ steps.run-check.outputs.lockfile-check-result }}
+  test-npm-extraneous-lockfile:
+    runs-on: ubuntu-latest
+    name: Test extraneous lockfile for npm
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Create dummy lockfiles
         run: touch package-lock.json && touch yarn.lock
       - name: Run lockfile check action
@@ -32,7 +48,49 @@ jobs:
         run: test "$CHECK_RESULT" = "failure"
         env:
           CHECK_RESULT: ${{ steps.run-check.outputs.lockfile-check-result }}
-  # test-npm-extraneous-lockfile:
-  # test-yarn-success:
-  # test-yarn-missing-lockfile:
-  # test-yarn-extraneous-lockfile:
+  test-yarn-success:
+    runs-on: ubuntu-latest
+    name: Test successful npm check
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Create dummy yarn.lock file
+        run: touch yarn.lock
+      - name: Run lockfile check action
+        uses: ./
+        with:
+          package-manager: yarn
+  test-yarn-missing-lockfile:
+    runs-on: ubuntu-latest
+    name: Test missing lockfile for yarn
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run lockfile check action
+        id: run-check
+        continue-on-error: true
+        uses: ./
+        with:
+          package-manager: yarn
+      - name: Expect failure
+        run: test "$CHECK_RESULT" = "failure"
+        env:
+          CHECK_RESULT: ${{ steps.run-check.outputs.lockfile-check-result }}
+  test-yarn-extraneous-lockfile:
+    runs-on: ubuntu-latest
+    name: Test extraneous lockfile for yarn
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Create dummy lockfiles
+        run: touch package-lock.json && touch yarn.lock
+      - name: Run lockfile check action
+        id: run-check
+        continue-on-error: true
+        uses: ./
+        with:
+          package-manager: yarn
+      - name: Expect failure
+        run: test "$CHECK_RESULT" = "failure"
+        env:
+          CHECK_RESULT: ${{ steps.run-check.outputs.lockfile-check-result }}
