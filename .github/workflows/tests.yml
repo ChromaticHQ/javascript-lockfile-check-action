@@ -1,0 +1,128 @@
+---
+on: [push]
+name: Tests
+jobs:
+
+  # Test that the check succeeds when:
+  # - checking for npm
+  # - package-loock.json exists
+  # - yarn.lock does not exist
+  test-npm-success:
+    runs-on: ubuntu-latest
+    name: Test successful npm check
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Create dummy package-lock.json file
+        run: touch package-lock.json
+      - name: Run lockfile check action
+        # Use the action in this repository.
+        uses: ./
+        with:
+          package-manager: npm
+
+  # Test that the check fails when:
+  # - checking for npm
+  # - no lockfile is found
+  test-npm-missing-lockfile:
+    runs-on: ubuntu-latest
+    name: Test missing lockfile for npm
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run lockfile check action
+        id: run-check
+        continue-on-error: true
+        # Use the action in this repository.
+        uses: ./
+        with:
+          package-manager: npm
+      - name: Expect failure
+        run: test "$CHECK_RESULT" = "failure"
+        env:
+          CHECK_RESULT: ${{ steps.run-check.outputs.lockfile-check-result }}
+
+  # Test that the check fails when:
+  # - checking for npm
+  # - yarn.lock is found
+  test-npm-extraneous-lockfile:
+    runs-on: ubuntu-latest
+    name: Test extraneous lockfile for npm
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Create dummy lockfiles
+        run: touch package-lock.json && touch yarn.lock
+      - name: Run lockfile check action
+        id: run-check
+        continue-on-error: true
+        # Use the action in this repository.
+        uses: ./
+        with:
+          package-manager: npm
+      - name: Expect failure
+        run: test "$CHECK_RESULT" = "failure"
+        env:
+          CHECK_RESULT: ${{ steps.run-check.outputs.lockfile-check-result }}
+
+  # Test that the check succeeds when:
+  # - checking for yarn
+  # - yarn.lock exists
+  # - package-loock.json does not exist
+  test-yarn-success:
+    runs-on: ubuntu-latest
+    name: Test successful npm check
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Create dummy yarn.lock file
+        run: touch yarn.lock
+      - name: Run lockfile check action
+        # Use the action in this repository.
+        uses: ./
+        with:
+          package-manager: yarn
+
+  # Test that the check fails when:
+  # - checking for yarn
+  # - no lockfile is found
+  test-yarn-missing-lockfile:
+    runs-on: ubuntu-latest
+    name: Test missing lockfile for yarn
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run lockfile check action
+        id: run-check
+        continue-on-error: true
+        # Use the action in this repository.
+        uses: ./
+        with:
+          package-manager: yarn
+      - name: Expect failure
+        run: test "$CHECK_RESULT" = "failure"
+        env:
+          CHECK_RESULT: ${{ steps.run-check.outputs.lockfile-check-result }}
+
+  # Test that the check fails when:
+  # - checking for yarn
+  # - pacakge-lock.json is found
+  test-yarn-extraneous-lockfile:
+    runs-on: ubuntu-latest
+    name: Test extraneous lockfile for yarn
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Create dummy lockfiles
+        run: touch package-lock.json && touch yarn.lock
+      - name: Run lockfile check action
+        id: run-check
+        continue-on-error: true
+        # Use the action in this repository.
+        uses: ./
+        with:
+          package-manager: yarn
+      - name: Expect failure
+        run: test "$CHECK_RESULT" = "failure"
+        env:
+          CHECK_RESULT: ${{ steps.run-check.outputs.lockfile-check-result }}
