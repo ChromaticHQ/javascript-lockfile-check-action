@@ -10,7 +10,7 @@ inputs:
     required: true
     default: 'npm'
   working-directory:
-    description: 'An optional working directory, relative to the root of the project'
+    description: 'An optional working directory, relative to the project root'
     default: './'
 outputs:
   lockfile-check-result:
