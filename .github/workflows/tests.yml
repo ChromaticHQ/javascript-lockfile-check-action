@@ -126,3 +126,18 @@ jobs:
         run: test "$CHECK_RESULT" = "failure"
         env:
           CHECK_RESULT: ${{ steps.run-check.outputs.lockfile-check-result }}
+
+  # Test using a custom working directory.
+  test-custom-working-directory:
+    runs-on: ubuntu-latest
+    name: Test custom working directory
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Create nested dummy yarn.lock file
+        run: mkdir -p nested/directory && touch nested/directory/yarn.lock
+      - name: Run lockfile check action
+        uses: ./
+        with:
+          package-manager: yarn
+          working-directory: nested/directory
