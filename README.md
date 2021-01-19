@@ -30,7 +30,7 @@ To use this action, simply add a step to your workflow, like so:
 ```
 
 Here’s an example workflow that checks out your repo and checks that you have
-the correct lockfile for Yarn within a custom theme for a Drupal project:
+the correct lockfile for Yarn within a custom theme for a CMS-based project:
 
 ```yaml
 on: push
