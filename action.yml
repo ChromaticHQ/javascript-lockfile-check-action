@@ -9,6 +9,9 @@ inputs:
     description: 'The package manager you use'
     required: true
     default: 'npm'
+  working-directory:
+    description: 'An optional working directory, relative to the project root'
+    default: './'
 outputs:
   lockfile-check-result:
     description: 'The results of the check; can be `success` or `failure`.'
@@ -17,3 +20,4 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.package-manager }}
+    - ${{ inputs.working-directory }}

@@ -12,6 +12,9 @@ emit_error()
   echo "::set-output name=lockfile-check-result::failure" && exit 1
 }
 
+# Change to the working directory (default is `./`).
+cd "$2"
+
 if [ "$1" = "npm" ]; then
   test -f "package-lock.json" || (echo "Error! Expected a package-lock.json file but none was found." && emit_error)
   test ! -f "yarn.lock" || (echo "Error! Extraneous yarn.lock file was found." && emit_error)
