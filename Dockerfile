@@ -1,5 +1,5 @@
 # Container image that runs this action.
-FROM alpine:3.14.2
+FROM alpine:3.14.3
 
 # Copy code file from action repo to container filesystem.
 COPY entrypoint.sh /entrypoint.sh
