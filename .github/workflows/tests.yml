@@ -12,7 +12,7 @@ jobs:
     name: Test successful npm check
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v3.3.0
       - name: Create dummy package-lock.json file
         run: touch package-lock.json
       - name: Run lockfile check action
@@ -29,7 +29,7 @@ jobs:
     name: Test missing lockfile for npm
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v3.3.0
       - name: Run lockfile check action
         id: run-check
         continue-on-error: true
@@ -50,7 +50,7 @@ jobs:
     name: Test extraneous lockfile for npm
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v3.3.0
       - name: Create dummy lockfiles
         run: touch package-lock.json && touch yarn.lock
       - name: Run lockfile check action
@@ -74,7 +74,7 @@ jobs:
     name: Test successful yarn check
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v3.3.0
       - name: Create dummy yarn.lock file
         run: touch yarn.lock
       - name: Run lockfile check action
@@ -91,7 +91,7 @@ jobs:
     name: Test missing lockfile for yarn
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v3.3.0
       - name: Run lockfile check action
         id: run-check
         continue-on-error: true
@@ -112,7 +112,7 @@ jobs:
     name: Test extraneous lockfile for yarn
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v3.3.0
       - name: Create dummy lockfiles
         run: touch package-lock.json && touch yarn.lock
       - name: Run lockfile check action
@@ -133,7 +133,7 @@ jobs:
     name: Test custom working directory
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v3.3.0
       - name: Create nested dummy yarn.lock file
         run: mkdir -p nested/directory && touch nested/directory/yarn.lock
       - name: Run lockfile check action
